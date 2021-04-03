@@ -20,7 +20,7 @@ const TheHeaderDropdown = () => {
       <CDropdownToggle className="c-header-nav-link" caret={false}>
         <div className="c-avatar">
           <CImg
-            src={'avatars/6.jpg'}
+            src={'/avatars/6.jpg'}
             className="c-avatar-img"
             alt="admin@bootstrapmaster.com"
           />
@@ -34,12 +34,12 @@ const TheHeaderDropdown = () => {
           className="text-center"
         >
           <strong>Account</strong>
-        </CDropdownItem>
+        </CDropdownItem> 
         <CDropdownItem>
           <CIcon name="cil-bell" className="mfe-2" />
-          Updates
-          <CBadge color="info" className="mfs-auto">42</CBadge>
-        </CDropdownItem>
+          Test
+          <CBadge color="info" className="mfs-auto">1</CBadge>
+        </CDropdownItem>{/*
         <CDropdownItem>
           <CIcon name="cil-envelope-open" className="mfe-2" />
           Messages
@@ -62,8 +62,8 @@ const TheHeaderDropdown = () => {
           className="text-center"
         >
           <strong>Settings</strong>
-        </CDropdownItem>
-        <CDropdownItem>
+        </CDropdownItem> */}
+        {/* <CDropdownItem>
           <CIcon name="cil-user" className="mfe-2" />Profile
         </CDropdownItem>
         <CDropdownItem>
@@ -79,11 +79,11 @@ const TheHeaderDropdown = () => {
           <CIcon name="cil-file" className="mfe-2" />
           Projects
           <CBadge color="primary" className="mfs-auto">42</CBadge>
-        </CDropdownItem>
+        </CDropdownItem> */}
         <CDropdownItem divider />
         <CDropdownItem onClick={e=> userAuth.signout()} >
           <CIcon name="cil-lock-locked" className="mfe-2" />
-          Lock Account
+          Logout
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>

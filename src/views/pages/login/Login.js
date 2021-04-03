@@ -17,13 +17,14 @@ import {
 import CIcon from "@coreui/icons-react";
 import { userAuth } from "src/routes";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const API_URI = "/admin/token/"
 
 const Login = () => {
   const history = useHistory();
   const [inputData, setInputData] = useState({username: "", password: ""});
-
+  const havePermisstionRoles = ["ADMIN", "AGRONOMER"];
   const formHandler = async (e) => {
     e.preventDefault();
     const reqBody = {
@@ -41,14 +42,19 @@ const Login = () => {
         body: JSON.stringify(reqBody),
       });
       const jsonRes = await loginReq.json();
-      console.log(loginReq);
+      console.log(jsonRes.role);
       if (loginReq.ok) {
-        userAuth.authenticate(jsonRes.access, jsonRes.refresh);
-        history.push("/user");
-      } else {
+        if(havePermisstionRoles.some(role => jsonRes.role.includes(role))){
+          userAuth.authenticate(jsonRes.access_token, jsonRes.refresh_token, jsonRes.role);
+          history.push("/user");
+        }
+        else{
+          toast.error("Нэвтрэх эрхгүй байна");
+        }
+      } 
+      else {
         toast.error("Нэвтрэх нэр нууц үг буруу байна");
       }
-      console.log(jsonRes);
     } catch (error) {
       console.error("Error:", error);
     }

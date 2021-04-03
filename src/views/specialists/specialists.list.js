@@ -5,38 +5,49 @@ import {
   CCard,
   CCardBody,
   CCol,
-  CRow
+  CRow,
 } from "@coreui/react";
 import React, { useState, useEffect } from "react";
 import { callJwtReq, userAuth } from "src/routes";
 import { Datatable } from "src/tools";
 const dataFormatter = (data) => {
-  try {
+  try{
     const result = data.map((dat) => ({
       username: dat.user.username,
-      province: dat.ref_province.name,
-      fullname: dat.fullname,
-      phone: dat.contact_phone,
+      province: dat.province.name,
+      // fullname: dat.fullname,
+      // phone: dat.contact_phone,
+      is_verified: dat.is_verified,
+      workRequests: dat.work_requests.length,
+      about: dat.about,
+      skill: dat.skill,
+      experience: dat.experience,
       joined: dat.user.date_joined,
+      work_requests: dat.work_requests
     }));
     return result;
-  } catch (e) {
+  }
+  catch(e){
+    console.log(e);
     return [];
   }
 };
 
-const fieldSettings = [
-  { key: "username", label: "Username" },
-  { key: "fullname", label: "Овог нэр" },
-  { key: "province", label: "Хариуцсан аймаг" },
-];
+const fieldSettings = [{ key: "username", label: "Username" },
+// { key: "fullname", label: "Овог нэр" },
+{ key: "province", label: "Хариуцсан аймаг" },
+{ key: "skill", label: "Ур чадвар" },
+{ key: "about", label: "About" },
+{ key: "experience", label: "Туршлага" },
+{ key: "workRequests", label: "Work requests" },
+{ key: "is_verified", label: "төлөв" }]
 
-const AgronomersList = () => {
+const SpecialistsList = () => {
   const [agronomers, setAgronomers] = useState([]);
-  const [dataLoading, setDataLoading] = useState(false);
+  const [dataLoading, setDataLoading ] = useState(false);
   useEffect(() => {
     setDataLoading(true);
-    callJwtReq("/admin/agronomer", {
+    callJwtReq("/admin/specialist", {
       method: "GET",
     })
       .then((response) => response.json())
@@ -56,7 +67,7 @@ const AgronomersList = () => {
         <CRow>
           <CCol sm="5">
             <h4 id="traffic" className="card-title mb-0">
-              Агрономичид
+              Мэргэжилтэн
             </h4>
             {/* <div className="small text-muted">November 2017</div> */}
           </CCol>
@@ -64,28 +75,13 @@ const AgronomersList = () => {
             <CButton color="primary" className="float-right">
               <CIcon name="cil-cloud-download" />
             </CButton>
-            {/* <CButtonGroup className="float-right mr-3">
-              {["Day", "Month", "Year"].map((value) => (
-                <CButton
-                  color="outline-secondary"
-                  key={value}
-                  className="mx-0"
-                  active={value === "Month"}
-                >
-                  {value}
-                </CButton>
-              ))}
-            </CButtonGroup> */}
           </CCol>
         </CRow>
-        <Datatable
-          tableData={dataFormatter(agronomers)}
-          loading={dataLoading}
-          fieldSettings={fieldSettings}
-        />
+        <Datatable tableData={dataFormatter(agronomers)} loading={dataLoading} fieldSettings={fieldSettings}/>
       </CCardBody>
     </CCard>
   );
 };
 
-export default AgronomersList;
+
+export default SpecialistsList;

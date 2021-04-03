@@ -1,1 +1,8 @@
+$green:#20c997; 
 // Variable overrides
+$theme-colors: (
+  "primary": #20c997,
+  "danger": #ff4136,
+);
+
+$side-bar-bg: $green;

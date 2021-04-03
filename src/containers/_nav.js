@@ -1,18 +1,8 @@
 import React from "react";
 import CIcon from "@coreui/icons-react";
+import { cilRunning, cilBank } from '@coreui/icons'
 
 const _nav = [
-  {
-    _tag: "CSidebarNavItem",
-    name: "Агрономичид",
-    to: "/agronomers",
-    icon: <CIcon name="cil-speedometer" customClasses="c-sidebar-nav-icon" />,
-    badge: {
-      color: "info",
-      text: "NEW",
-    },
-  },
-
   {
     _tag: 'CSidebarNavItem',
     name: 'Dashboard',
@@ -320,4 +310,126 @@ const _nav = [
   }
 ];
 
-export default _nav;
+const agroNav = [
+  {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Тариаланчид',
+    route: '/base',
+    icon: <CIcon name="cil-user" customClasses="c-sidebar-nav-icon"/>,
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Жагсаалт',
+        to: '/agronomers',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Бүртгэх',
+        to: '/agronomers',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Ажлын хүсэлтүүд',
+        to: '/',
+      },
+    ],
+  },
+  {
+    _tag: 'CSidebarNavItem',
+    name: 'Сонордуулга',
+    to: '/',
+    icon: 'cil-bell',
+  },
+  {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Компаниуд',
+    route: '/',
+    icon: <CIcon content={cilBank} customClasses="c-sidebar-nav-icon"/>,
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Жагсаалт',
+        to: '/',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Бүртгэх',
+        to: '/',
+      }
+    ],
+  },
+  {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Захиалгууд',
+    route: '/',
+    icon: 'cil-list',
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'List',
+        to: '/',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'List',
+        to: '/',
+      }
+    ],
+  },
+  {
+    _tag: "CSidebarNavTitle",
+    _children: ["Linsting"],
+  },
+  {
+    _tag: "CSidebarNavTitle",
+    _children: ["Forms"],
+  },
+];
+
+const adminNav = [
+  {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Агрономичид',
+    route: '/agronomers',
+    icon: <CIcon name="cil-people" customClasses="c-sidebar-nav-icon"/>,
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Жагсаалт',
+        to: '/agronomers',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Бүртгэх',
+        to: '/',
+      }
+    ],
+  },
+  {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Мэргэжилтэн',
+    route: '/specialists',
+    icon: <CIcon content={cilRunning} customClasses="c-sidebar-nav-icon"/>,
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Жагсаалт',
+        to: '/specialists',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Бүртгэх',
+        to: '/',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Ажлын хүсэлтүүд',
+        to: '/',
+      },
+    ],
+  },
+  ...agroNav
+];
+
+
+export { adminNav, agroNav, _nav };
